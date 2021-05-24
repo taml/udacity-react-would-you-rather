@@ -8,23 +8,23 @@ export default function users(state = {}, action) {
                 ...action.users,
             }
         case ADD_Q_TO_USER:
-            const { question } = action
+            const { author, qid } = action
             return {
                 ...state,
-                [question.author]: {
-                    ...state[question.author],
-                    questions: state[question.author].questions.concat(question.qid),
+                [author]: {
+                    ...state[author],
+                    questions: state[author].questions.concat([qid]),
                 }
             }
         case ADD_A_TO_USER:
-            const { question } = action
+            const { authedUser, q_id, answer } = action
             return {
                 ...state,
-                [question.authedUser]: {
-                    ...state[question.authedUser],
+                [authedUser]: {
+                    ...state[authedUser],
                     answers: {
-                        ...state[question.authedUser].answers,
-                        [question.qid]: question.answer,
+                        ...state[authedUser].answers,
+                        [q_id]: answer,
                     }
                 }
             }
