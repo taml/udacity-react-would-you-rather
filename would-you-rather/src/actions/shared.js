@@ -1,5 +1,5 @@
 import { getInitialData, saveQuestionAnswer, saveQuestion } from '../utils/api'
-import { receiveUsers, addQuestionToUser, addAnswerToUser } from '../actions/users'
+import { receiveUsers, addAnswerToUser } from '../actions/users'
 import { addQuestion, receiveQuestions, answerQuestion } from '../actions/questions'
 import { setAuthedUser } from '../actions/authedUser'
 import { showLoading, hideLoading } from 'react-redux-loading'
@@ -27,7 +27,6 @@ export function handleAddQuestion(optionOneText, optionTwoText) {
             optionTwoText,
         })
         .then((question) => dispatch(addQuestion(question)))
-        .then((question) => dispatch(addQuestionToUser(question)))
         .then(() => dispatch(hideLoading()))
     }
 }
