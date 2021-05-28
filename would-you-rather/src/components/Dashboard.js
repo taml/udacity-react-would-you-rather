@@ -7,7 +7,7 @@ class Dashboard extends Component {
         const { users, authedUser } = this.props
         return(
             <div>
-                <Nav authedUser={users[authedUser].name} />
+                <Nav />
             </div>
         )
     }

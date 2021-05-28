@@ -7,7 +7,7 @@ import { Redirect } from 'react-router-dom'
 class Auth extends Component {
 
     state = {
-        selectedUser: null,
+        selectedUser: 'default',
         toDashboard: false,
     }
 
@@ -39,7 +39,7 @@ class Auth extends Component {
             <div>
                 <h3>Would You Rather...?</h3>
                 <form onSubmit={this.handleSubmit}>
-                    <select value="default" onChange={this.authenticateUser}>
+                    <select value={selectedUser} onChange={this.authenticateUser}>
                         <option key="default" value="default" disabled>Select User...</option>
                         {Object.keys(users).map((user, index) => (
                             <option key={index} value={users[user].id}>{users[user].name}</option>
