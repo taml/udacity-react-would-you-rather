@@ -1,17 +1,9 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
-import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { setAuthedUser } from '../actions/authedUser'
 
 class Nav extends Component {
-
-    logUserOut = (e) => {
-        e.preventDefault()
-        this.props.dispatch(setAuthedUser(null))
-        return <Redirect to='/' />
-    }
-
     render() {
         const { users, authedUser } = this.props
         return(
@@ -37,7 +29,9 @@ class Nav extends Component {
                         <img width="40" height="40" src={users[authedUser].avatarURL} alt={`${users[authedUser].name} Avatar`} />
                     </li>
                     <li>
-                        <button onClick={this.logUserOut}>Logout</button>
+                        <NavLink to='/' onClick={() => this.props.dispatch(setAuthedUser(null))}>
+                            Logout
+                        </NavLink>
                     </li>
                 </ul>
             </nav>
