@@ -13,7 +13,7 @@ class App extends Component {
         this.props.dispatch(handleInitialData())
     }
     render() {
-        console.log(this.props.questions)
+        console.log(this.props.users)
         return (
             <Router>
                 <Fragment>
@@ -21,7 +21,7 @@ class App extends Component {
                     <div className="App">
                         {this.props.loading === true ? <Auth /> : <div>
                             <Route path='/' exact component={Dashboard} />
-                            <Route path='/new' component={NewQuestion} />
+                            <Route path='/add' component={NewQuestion} />
                             <Route path='/leaderboard' component={Leaderboard} />
                         </div>}
                     </div>
@@ -31,11 +31,12 @@ class App extends Component {
     }
 }
 
-function mapStateToProps({ authedUser, questions })  {
+function mapStateToProps({ authedUser, questions, users })  {
     return {
         loading: authedUser === null, 
         authedUser, 
         questions,
+        users
     }
 }
 
