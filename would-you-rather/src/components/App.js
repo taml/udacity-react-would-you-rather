@@ -13,6 +13,7 @@ class App extends Component {
         this.props.dispatch(handleInitialData())
     }
     render() {
+        console.log(this.props.questions)
         console.log(this.props.users)
         return (
             <Router>

@@ -1,5 +1,5 @@
 import { getInitialData, saveQuestionAnswer, saveQuestion } from '../utils/api'
-import { receiveUsers, addAnswerToUser } from '../actions/users'
+import { receiveUsers } from '../actions/users'
 import { addQuestion, receiveQuestions, answerQuestion } from '../actions/questions'
 import { showLoading, hideLoading } from 'react-redux-loading'
 
@@ -32,7 +32,6 @@ export function handleAddQuestion(optionOneText, optionTwoText) {
 export function handleAnswerQuestion(answer) {
     return (dispatch) => {
         dispatch(answerQuestion(answer))
-        dispatch(addAnswerToUser(answer))
         return saveQuestionAnswer(answer)
         .catch((e) => {
             console.warn('Error in handleAnswerQuestion: ', e)
