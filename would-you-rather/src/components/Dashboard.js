@@ -3,31 +3,59 @@ import { connect } from 'react-redux'
 import Nav from './Nav'
 
 class Dashboard extends Component {
+
+    state = {
+        unansweredSelected: true,
+        answeredSelected: false,
+    }
+
+    handleUnansweredView = (e) => {
+        e.preventDefault()
+        this.setState(() => ({
+            unansweredSelected: true,
+            answeredSelected: false,
+        }))
+    }
+
+    handleAnsweredView = (e) => {
+        e.preventDefault()
+        this.setState(() => ({
+            unansweredSelected: false,
+            answeredSelected: true,
+        }))
+    }
+
     render() {
         const { authedUser, questions, users, unansweredQuestions, answeredQuestions } = this.props
+        const { unansweredSelected, answeredSelected } = this.state
         return(
             <div>
                 <Nav />
-                <h3>Unanswered Questions</h3>
-                { unansweredQuestions.map((question) => 
-                    <li key={question.id}>
-                        Would you rather...? <br></br>
-                        { question.author } <br></br>
-                        { question.timestamp } <br></br>
-                        { question.optionOne.text } <br></br>
-                        { question.optionTwo.text } <br></br>
-                    </li>
+                <button onClick={this.handleUnansweredView}>Unanswered Questions</button><button onClick={this.handleAnsweredView}>Answered Questions</button>
+                { unansweredSelected === true && <div>
+                    <h3>Unanswered Questions</h3>
+                    { unansweredQuestions.map((question) => 
+                        <li key={question.id}>
+                            Would you rather...? <br></br>
+                            { question.author } <br></br>
+                            { question.timestamp } <br></br>
+                            { question.optionOne.text } <br></br>
+                            { question.optionTwo.text } <br></br>
+                        </li>
                 ) }
-                <h3>Answered Questions</h3>
-                { answeredQuestions.map((question) => 
-                    <li key={question.id}>
-                        Would you rather...? <br></br>
-                        { question.author } <br></br>
-                        { question.timestamp } <br></br>
-                        { question.optionOne.text } <br></br>
-                        { question.optionTwo.text } <br></br>
-                    </li>
-                ) }
+                </div> }
+                { answeredSelected === true && <div>
+                    <h3>Answered Questions</h3>
+                    { answeredQuestions.map((question) => 
+                        <li key={question.id}>
+                            Would you rather...? <br></br>
+                            { question.author } <br></br>
+                            { question.timestamp } <br></br>
+                            { question.optionOne.text } <br></br>
+                            { question.optionTwo.text } <br></br>
+                        </li>
+                    ) }
+                </div> }
             </div>
         )
     }
