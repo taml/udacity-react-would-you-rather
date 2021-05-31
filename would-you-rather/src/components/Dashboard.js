@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Nav from './Nav'
+import Question from './Question'
 
 class Dashboard extends Component {
 
@@ -36,11 +37,7 @@ class Dashboard extends Component {
                     <h3>Unanswered Questions</h3>
                     { unansweredQuestions.map((question) => 
                         <li key={question.id}>
-                            Would you rather...? <br></br>
-                            { question.author } <br></br>
-                            { question.timestamp } <br></br>
-                            { question.optionOne.text } <br></br>
-                            { question.optionTwo.text } <br></br>
+                            <Question question={question} authorAvatar={users[question.author].avatarURL} />
                         </li>
                 ) }
                 </div> }
@@ -48,11 +45,7 @@ class Dashboard extends Component {
                     <h3>Answered Questions</h3>
                     { answeredQuestions.map((question) => 
                         <li key={question.id}>
-                            Would you rather...? <br></br>
-                            { question.author } <br></br>
-                            { question.timestamp } <br></br>
-                            { question.optionOne.text } <br></br>
-                            { question.optionTwo.text } <br></br>
+                            <Question question={question} authorAvatar={users[question.author].avatarURL} />
                         </li>
                     ) }
                 </div> }
