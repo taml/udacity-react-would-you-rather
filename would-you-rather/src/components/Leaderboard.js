@@ -1,20 +1,21 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Nav from './Nav'
 import Leader from './Leader'
 
-function Leaderboard(props) {
-    console.log(props.leaders)
-    return(
-        <div>
-            <Nav />
-            <h3>Leaderboard</h3>
-            {props.leaders.map((leader) => (
-            <li key={leader.name}>
-                <Leader leader={leader} />
-            </li>))}
-        </div>
-    )
+class Leaderboard extends Component {
+    render() {
+        return(
+            <div>
+                <Nav />
+                <h3>Leaderboard</h3>
+                {this.props.leaders.map((leader) => (
+                <li key={leader.name}>
+                    <Leader leader={leader} />
+                </li>))}
+            </div>
+        )
+    }
 }
 
 function mapStateToProps({ users }) {
@@ -32,9 +33,8 @@ function mapStateToProps({ users }) {
             leaderboardScore,
         }
     }).sort((userA, userB) => userB.leaderboardScore - userA.leaderboardScore)
-
     return {
-        leaders
+        leaders, 
     }
 }
 

@@ -1,14 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { setAuthedUser } from '../actions/authedUser'
-import { Redirect } from 'react-router-dom'
 
 
 class Auth extends Component {
 
     state = {
         selectedUser: 'default',
-        toDashboard: false,
     }
 
     authenticateUser = (e) => {
@@ -25,16 +23,13 @@ class Auth extends Component {
 
         this.setState(() => ({
             selectedUser: null, 
-            toDashboard: true,
         }))
     }
 
     render() {
         const { users } = this.props
-        const { selectedUser, toDashboard } = this.state
-        if(toDashboard === true) {
-            return <Redirect to='/' />
-        }
+        const { selectedUser } = this.state
+
         return(
             <div>
                 <h3>Would You Rather...?</h3>
