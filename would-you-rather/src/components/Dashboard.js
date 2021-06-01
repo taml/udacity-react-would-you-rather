@@ -37,7 +37,7 @@ class Dashboard extends Component {
                     <h3>Unanswered Questions</h3>
                     { unansweredQuestions.map((question) => 
                         <li key={question.id}>
-                            <Question question={question} authorAvatar={users[question.author].avatarURL} />
+                            <Question id={question.id} />
                         </li>
                 ) }
                 </div> }
@@ -45,7 +45,7 @@ class Dashboard extends Component {
                     <h3>Answered Questions</h3>
                     { answeredQuestions.map((question) => 
                         <li key={question.id}>
-                            <Question question={question} authorAvatar={users[question.author].avatarURL} />
+                            <Question id={question.id} />
                         </li>
                     ) }
                 </div> }
