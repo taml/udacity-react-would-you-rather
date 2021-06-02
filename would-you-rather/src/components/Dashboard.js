@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Nav from './Nav'
-import Question from './Question'
+import QuestionPreview from './QuestionPreview'
+import { withRouter } from 'react-router-dom'
 
 class Dashboard extends Component {
 
@@ -37,7 +38,7 @@ class Dashboard extends Component {
                     <h3>Unanswered Questions</h3>
                     { unansweredQuestions.map((question) => 
                         <li key={question.id}>
-                            <Question id={question.id} />
+                            <QuestionPreview question={question} avatar={users[question.author].avatarURL} linkText={'Answer Question'}/>
                         </li>
                 ) }
                 </div> }
@@ -45,7 +46,7 @@ class Dashboard extends Component {
                     <h3>Answered Questions</h3>
                     { answeredQuestions.map((question) => 
                         <li key={question.id}>
-                            <Question id={question.id} />
+                            <QuestionPreview question={question} avatar={users[question.author].avatarURL} linkText={'View Question'}/>
                         </li>
                     ) }
                 </div> }
@@ -74,4 +75,4 @@ function mapStateToProps({ authedUser, questions, users })  {
     }
 }
 
-export default connect(mapStateToProps)(Dashboard)
+export default withRouter(connect(mapStateToProps)(Dashboard))
