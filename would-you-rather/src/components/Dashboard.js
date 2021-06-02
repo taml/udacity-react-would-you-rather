@@ -41,6 +41,8 @@ class Dashboard extends Component {
                             <QuestionPreview question={question} avatar={users[question.author].avatarURL} linkText={'Answer Question'}/>
                         </li>
                 ) }
+                    { unansweredQuestions.length === 0 && 
+                    <p>You have no unanswered questions left!</p>}
                 </div> }
                 { answeredSelected === true && <div>
                     <h3>Answered Questions</h3>
@@ -49,6 +51,8 @@ class Dashboard extends Component {
                             <QuestionPreview question={question} avatar={users[question.author].avatarURL} linkText={'View Question'}/>
                         </li>
                     ) }
+                    { answeredQuestions.length === 0 && 
+                    <p>You have not answered any questions!</p>}
                 </div> }
             </div>
         )
