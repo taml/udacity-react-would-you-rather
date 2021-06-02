@@ -17,8 +17,6 @@ class App extends Component {
         this.props.dispatch(handleInitialData())
     }
     render() {
-        console.log(this.props.questions)
-        console.log(this.props.users)
         return (
             <Router>
                 <Fragment>
@@ -45,12 +43,9 @@ class App extends Component {
     }
 }
 
-function mapStateToProps({ authedUser, questions, users })  {
+function mapStateToProps({ authedUser })  {
     return {
         loading: authedUser === null, 
-        authedUser, 
-        questions,
-        users
     }
 }
 

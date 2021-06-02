@@ -10,7 +10,6 @@ class QuestionPage extends Component {
         if (this.props.validId !== true) {
             return <Redirect to='/question/id_invalid' />
         }
-        console.log(id)
         return(
             <div>
                 <Nav />
@@ -22,7 +21,6 @@ class QuestionPage extends Component {
 
 function mapStateToProps({ questions }, props) {
     const questionIds = Object.keys(questions).filter((question) => questions[question].id === props.match.params.question_id)
-    console.log(questionIds)
     const validId = questionIds.length > 0
     return {
         validId 
