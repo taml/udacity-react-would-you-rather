@@ -14,4 +14,3 @@ export function unsetAuthedUser(authedUser) {
         authedUser
     }
 }
-

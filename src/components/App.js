@@ -2,7 +2,6 @@ import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { handleInitialData } from '../actions/shared'
-import LoadingBar from 'react-redux-loading'
 import Auth from './Auth'
 import Dashboard from './Dashboard'
 import NewQuestion from './NewQuestion'
@@ -20,7 +19,6 @@ class App extends Component {
         return (
             <Router>
                 <Fragment>
-                    <LoadingBar />
                     <div className="App">
                         {this.props.loading === true ? (<Route><Auth/></Route>) : 
                             <Switch>
