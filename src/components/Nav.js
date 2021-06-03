@@ -12,7 +12,7 @@ class Nav extends Component {
                 <div className="relative flex items-center justify-between h-16">
                     <div className="absolute inset-y-0 left-0 flex items-center pr-2">
                         <div className="flex space-x-4">
-                            <NavLink to='/' className="text-white px-3 py-1 mx-4 rounded-md text-lg font-black">
+                            <NavLink to='/' className="text-white px-3 py-1 ml-4 rounded-md text-lg font-black">
                                 WYR?
                             </NavLink>
                             <NavLink to='/' className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">

@@ -6,13 +6,19 @@ import Leader from './Leader'
 class Leaderboard extends Component {
     render() {
         return(
-            <div>
+            <div className="bg-gray-50">
                 <Nav />
-                <h3>Leaderboard</h3>
-                {this.props.leaders.map((leader) => (
-                <li key={leader.name}>
-                    <Leader leader={leader} />
-                </li>))}
+                <div className="container mx-auto pb-12 px-4">
+                    <h3 className="font-extrabold text-3xl text-center text-gray-700 pt-10 pb-10">Leaderboard</h3>
+                    <div className="grid grid-cols-6 gap-4">
+                        <div className="col-start-2 col-span-4">
+                            {this.props.leaders.map((leader) => (
+                                <li className="list-none" key={leader.name}>
+                                    <Leader leader={leader} />
+                                </li>))}
+                        </div>
+                    </div>
+                </div>
             </div>
         )
     }
