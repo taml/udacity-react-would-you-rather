@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { formatDate } from '../utils/helper'
 import { handleAnswerQuestion } from '../actions/shared'
+import { ThumbUpIcon, ThumbDownIcon } from '@heroicons/react/outline'
 
 class Question extends Component {
 
@@ -35,36 +35,48 @@ class Question extends Component {
 
     render() {
         const { question, authorAvatar, answeredQOne, answeredQTwo, noOfUsers } = this.props
-        const { author, timestamp } = question
+        const { author } = question
         return(
-            <div>
-                <h3>Would you rather...?</h3>
-                <p>{`By ${author}`}</p>
-                <img width="100" height="100" src={authorAvatar} alt={`${author} Avatar`} />
-                <p>{`Posted on ${formatDate(timestamp)}`}</p>
-                {(answeredQOne === !true && answeredQTwo === !true) && 
-                    <form onSubmit={this.handleSubmit}>
-                        <label>
-                            <input type="radio" value="optionOne" checked={this.state.selected === 'optionOne'}
-                                onChange={this.handleSelected} />{question.optionOne.text}
-                        </label>
-                        <label>
-                            <input type="radio" value="optionTwo" checked={this.state.selected === 'optionTwo'}
-                                onChange={this.handleSelected} />{question.optionTwo.text}
-                        </label>
-                        <button type='submit'>Submit Answer</button>
-                    </form>
-                }
-                {(answeredQOne === true || answeredQTwo === true) && 
-                    <div>
-                        <p style={{color: this.answerColor(answeredQOne)}}>{question.optionOne.text}</p>
-                        <p>{question.optionOne.votes.length} Answers</p>
-                        <p>{this.percentageOfVoters(question.optionOne.votes.length, noOfUsers)} % of Users have selected this option</p>
-                        <p style={{color: this.answerColor(answeredQTwo)}}>{ question.optionTwo.text }</p>
-                        <p>{question.optionTwo.votes.length} Answers</p>
-                        <p>{this.percentageOfVoters(question.optionTwo.votes.length, noOfUsers)} % of Users have selected this option</p>
+            <div className="container -mt-14 mx-auto px-4">
+                <div className="flex h-screen justify-center items-center">
+                    <div className="w-2/5 bg-gray-700 rounded-xl p-12">
+                        <img className="w-32 mx-auto" src={authorAvatar} alt={`${author} Avatar`} />
+                        <p className="text-white text-center font-medium pt-4">{`By ${author}`}</p>
+                        <h3 className="text-white font-extrabold text-xl text-center pt-4 pb-10">Would you rather...</h3>
+                        {(answeredQOne === !true && answeredQTwo === !true) && 
+                            <form onSubmit={this.handleSubmit}>
+                                <label>
+                                    <input type="radio" value="optionOne" checked={this.state.selected === 'optionOne'}
+                                        onChange={this.handleSelected} />{question.optionOne.text}
+                                </label>
+                                <label>
+                                    <input type="radio" value="optionTwo" checked={this.state.selected === 'optionTwo'}
+                                        onChange={this.handleSelected} />{question.optionTwo.text}
+                                </label>
+                                <button type='submit'>Submit Answer</button>
+                            </form>
+                        }
+                        {(answeredQOne === true || answeredQTwo === true) && 
+                            <div className="grid grid-cols-3 gap-4">
+                                <div className="text-center">
+                                    {answeredQOne === true ? <div><ThumbUpIcon className="w-6 pb-4 mx-auto text-green-400" /> <p className="text-white font-semibold">{question.optionOne.text}</p></div> 
+                                        : <div><ThumbDownIcon className="w-6 pb-4 mx-auto text-gray-300" /> <p className="text-white font-semibold">{question.optionOne.text}</p></div>}
+                                    <p className="text-white">{`${question.optionOne.votes.length} ${question.optionOne.votes.length !== 1 ? 'Votes' : 'Vote'}`}</p>
+                                    <p className="text-white">{this.percentageOfVoters(question.optionOne.votes.length, noOfUsers)} % of Votes</p>
+                                </div>
+                                <div className="text-center my-auto">
+                                    <p className="text-white">Or</p>
+                                </div>
+                                <div className="text-center">
+                                {answeredQTwo === true ? <div><ThumbUpIcon className="w-6 pb-4 mx-auto text-green-400" /> <p className="text-white font-semibold">{question.optionTwo.text}</p></div> 
+                                        : <div><ThumbDownIcon className="w-6 pb-4 mx-auto text-gray-300" /> <p className="text-white font-semibold">{question.optionTwo.text}</p></div>}
+                                    <p className="text-white">{`${question.optionTwo.votes.length} ${question.optionTwo.votes.length !== 1 ? 'Votes' : 'Vote'}`}</p>
+                                    <p className="text-white">{this.percentageOfVoters(question.optionTwo.votes.length, noOfUsers)} % of Votes</p>
+                                </div>
+                            </div>
+                        }
                     </div>
-                }
+                </div>
             </div>
         )
     }

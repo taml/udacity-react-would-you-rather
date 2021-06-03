@@ -3,12 +3,12 @@ import { formatDate } from '../utils/helper'
 import { Link } from 'react-router-dom'
 
 function QuestionPreview(props) {
-    const { question, avatar, linkText } = props
+    const { question, qauthor, linkText } = props
     return(
         <div className="bg-gray-700 rounded-xl grid grid-cols-6 p-12 mb-12">
             <div>
-                <img className="w-32" src={avatar} alt={`${question.author} Avatar`} />
-                <p className="text-white text-center font-medium pt-4">{`By ${question.author}`}</p>
+                <img className="w-32" src={qauthor.avatarURL} alt={`${question.author} Avatar`} />
+                <p className="text-white text-center font-medium pt-4">{`By ${qauthor.name}`}</p>
             </div>
             <div className="col-span-4 px-12 my-auto">
                 <h3 className="text-white font-extrabold text-xl pb-4">{`Would you rather...${question.optionOne.text} or ${question.optionTwo.text}?`}</h3>

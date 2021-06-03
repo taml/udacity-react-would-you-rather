@@ -11,7 +11,7 @@ class QuestionPage extends Component {
             return <Redirect to='/question/id_invalid' />
         }
         return(
-            <div>
+            <div className="bg-gray-50">
                 <Nav />
                 <Question id={id} />
             </div>

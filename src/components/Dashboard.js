@@ -44,7 +44,7 @@ class Dashboard extends Component {
                             <h3 className="font-extrabold text-3xl text-center text-gray-700 pt-10 pb-10">Unanswered Questions</h3>
                             { unansweredQuestions.map((question) => 
                                 <li className="list-none" key={question.id}>
-                                    <QuestionPreview question={question} avatar={users[question.author].avatarURL} linkText={'Answer'}/>
+                                    <QuestionPreview question={question} qauthor={users[question.author]} linkText={'Answer'}/>
                                 </li>
                             ) }
                             { unansweredQuestions.length === 0 && 
@@ -54,7 +54,7 @@ class Dashboard extends Component {
                                 <h3 className="font-extrabold text-3xl text-center text-gray-700 pt-10 pb-10">Answered Questions</h3>
                                 { answeredQuestions.map((question) => 
                                     <li className="list-none" key={question.id}>
-                                        <QuestionPreview question={question} avatar={users[question.author].avatarURL} linkText={'View'}/>
+                                        <QuestionPreview question={question} qauthor={users[question.author]} linkText={'View'}/>
                                     </li>
                                 ) }
                                 { answeredQuestions.length === 0 && 
