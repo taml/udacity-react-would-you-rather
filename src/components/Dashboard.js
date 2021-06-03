@@ -33,27 +33,30 @@ class Dashboard extends Component {
         return(
             <div>
                 <Nav />
-                <button onClick={this.handleUnansweredView}>Unanswered Questions</button><button onClick={this.handleAnsweredView}>Answered Questions</button>
-                { unansweredSelected === true && <div>
-                    <h3>Unanswered Questions</h3>
-                    { unansweredQuestions.map((question) => 
-                        <li key={question.id}>
-                            <QuestionPreview question={question} avatar={users[question.author].avatarURL} linkText={'Answer Question'}/>
-                        </li>
-                ) }
-                    { unansweredQuestions.length === 0 && 
-                    <p>You have no unanswered questions left!</p>}
-                </div> }
-                { answeredSelected === true && <div>
-                    <h3>Answered Questions</h3>
-                    { answeredQuestions.map((question) => 
-                        <li key={question.id}>
-                            <QuestionPreview question={question} avatar={users[question.author].avatarURL} linkText={'View Question'}/>
-                        </li>
+                <div className="container mx-auto py-10 px-4 text-center">
+                    <button className="text-white bg-indigo-500 hover:bg-indigo-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium" onClick={this.handleUnansweredView}>Unanswered Questions</button>
+                    <button className="text-gray-300 bg-indigo-500 hover:bg-indigo-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium" onClick={this.handleAnsweredView}>Answered Questions</button>
+                    { unansweredSelected === true && <div>
+                        <h3>Unanswered Questions</h3>
+                        { unansweredQuestions.map((question) => 
+                            <li key={question.id}>
+                                <QuestionPreview question={question} avatar={users[question.author].avatarURL} linkText={'Answer Question'}/>
+                            </li>
                     ) }
-                    { answeredQuestions.length === 0 && 
-                    <p>You have not answered any questions!</p>}
-                </div> }
+                        { unansweredQuestions.length === 0 && 
+                        <p>You have no unanswered questions left!</p>}
+                    </div> }
+                    { answeredSelected === true && <div>
+                        <h3>Answered Questions</h3>
+                        { answeredQuestions.map((question) => 
+                            <li key={question.id}>
+                                <QuestionPreview question={question} avatar={users[question.author].avatarURL} linkText={'View Question'}/>
+                            </li>
+                        ) }
+                        { answeredQuestions.length === 0 && 
+                        <p>You have not answered any questions!</p>}
+                    </div> }
+                </div>
             </div>
         )
     }
