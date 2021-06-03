@@ -21,7 +21,7 @@ class Nav extends Component {
                             <NavLink to='/leaderboard' className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
                                 Leaderboard
                             </NavLink>
-                            <NavLink to='/add' className="text-white bg-indigo-500 hover:bg-indigo-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                            <NavLink to='/add' className="text-white bg-indigo-500 hover:bg-indigo-600 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
                                 + New Question
                             </NavLink>
                         </div>

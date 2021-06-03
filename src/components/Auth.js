@@ -34,10 +34,10 @@ class Auth extends Component {
             <div className="bg-gray-50">
                 <div className="container mx-auto px-4">
                     <div className="flex h-screen justify-center items-center">
-                        <div className="w-2/5 text-center bg-gray-800 rounded-xl">
+                        <div className="w-2/5 text-center bg-gray-700 rounded-xl">
                             <h3 className="font-extrabold text-3xl text-white pt-24 pb-10">Would You Rather...?</h3>
                             <form onSubmit={this.handleSubmit}>
-                                <select className="block w-60 mx-auto rounded-md text-white bg-gray-700 border-transparent focus:border-gray-500 focus:bg-gray-700 focus:ring-0" value={selectedUser} onChange={this.authenticateUser}>
+                                <select className="block w-60 mx-auto rounded-md text-white bg-gray-600 border-transparent focus:border-gray-500 focus:bg-gray-600 focus:ring-0" value={selectedUser} onChange={this.authenticateUser}>
                                     <option key="default" value="default" disabled>Select User...</option>
                                     {Object.keys(users).map((user, index) => (
                                         <option key={index} value={users[user].id}>{users[user].name}</option>
