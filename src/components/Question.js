@@ -44,23 +44,28 @@ class Question extends Component {
                         <p className="text-white text-center font-medium pt-4">{`By ${author}`}</p>
                         <h3 className="text-white font-extrabold text-xl text-center pt-4 pb-10">Would you rather...</h3>
                         {(answeredQOne === !true && answeredQTwo === !true) && 
-                            <form onSubmit={this.handleSubmit}>
-                                <label>
-                                    <input type="radio" value="optionOne" checked={this.state.selected === 'optionOne'}
-                                        onChange={this.handleSelected} />{question.optionOne.text}
-                                </label>
-                                <label>
-                                    <input type="radio" value="optionTwo" checked={this.state.selected === 'optionTwo'}
-                                        onChange={this.handleSelected} />{question.optionTwo.text}
-                                </label>
-                                <button type='submit'>Submit Answer</button>
+                            <form className="text-center" onSubmit={this.handleSubmit}>
+                                <div className="grid grid-cols-3">
+                                    <label className="text-white">
+                                        <input className="form-radio mr-2" type="radio" value="optionOne" checked={this.state.selected === 'optionOne'}
+                                            onChange={this.handleSelected} />{question.optionOne.text}?
+                                    </label>
+                                    <div className="text-center my-auto">
+                                        <p className="text-white">Or</p>
+                                    </div>
+                                    <label className="text-white">
+                                        <input className="form-radio mr-2" type="radio" value="optionTwo" checked={this.state.selected === 'optionTwo'}
+                                            onChange={this.handleSelected} />{question.optionTwo.text}?
+                                    </label>
+                                </div>
+                                <button className="w-60 text-white bg-indigo-500 hover:bg-indigo-600 hover:text-white px-3 py-2 mt-12 rounded-md text-md font-medium" type='submit'>Submit Answer</button>
                             </form>
                         }
                         {(answeredQOne === true || answeredQTwo === true) && 
                             <div className="grid grid-cols-3 gap-4">
                                 <div className="text-center">
-                                    {answeredQOne === true ? <div><ThumbUpIcon className="w-6 pb-4 mx-auto text-green-400" /> <p className="text-white font-semibold">{question.optionOne.text}</p></div> 
-                                        : <div><ThumbDownIcon className="w-6 pb-4 mx-auto text-gray-300" /> <p className="text-white font-semibold">{question.optionOne.text}</p></div>}
+                                    {answeredQOne === true ? <div><ThumbUpIcon className="w-6 pb-4 mx-auto text-green-400" /> <p className="text-white font-semibold">{question.optionOne.text}?</p></div> 
+                                        : <div><ThumbDownIcon className="w-6 pb-4 mx-auto text-gray-300" /> <p className="text-white font-semibold">{question.optionOne.text}?</p></div>}
                                     <p className="text-white">{`${question.optionOne.votes.length} ${question.optionOne.votes.length !== 1 ? 'Votes' : 'Vote'}`}</p>
                                     <p className="text-white">{this.percentageOfVoters(question.optionOne.votes.length, noOfUsers)} % of Votes</p>
                                 </div>
@@ -68,8 +73,8 @@ class Question extends Component {
                                     <p className="text-white">Or</p>
                                 </div>
                                 <div className="text-center">
-                                {answeredQTwo === true ? <div><ThumbUpIcon className="w-6 pb-4 mx-auto text-green-400" /> <p className="text-white font-semibold">{question.optionTwo.text}</p></div> 
-                                        : <div><ThumbDownIcon className="w-6 pb-4 mx-auto text-gray-300" /> <p className="text-white font-semibold">{question.optionTwo.text}</p></div>}
+                                {answeredQTwo === true ? <div><ThumbUpIcon className="w-6 pb-4 mx-auto text-green-400" /> <p className="text-white font-semibold">{question.optionTwo.text}?</p></div> 
+                                        : <div><ThumbDownIcon className="w-6 pb-4 mx-auto text-gray-300" /> <p className="text-white font-semibold">{question.optionTwo.text}?</p></div>}
                                     <p className="text-white">{`${question.optionTwo.votes.length} ${question.optionTwo.votes.length !== 1 ? 'Votes' : 'Vote'}`}</p>
                                     <p className="text-white">{this.percentageOfVoters(question.optionTwo.votes.length, noOfUsers)} % of Votes</p>
                                 </div>
