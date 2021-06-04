@@ -1,70 +1,114 @@
-# Getting Started with Create React App
+# Would You Rather Project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is part of the Udacity React Nanodegree and utilises a provided backend/API to display Would You Rather style questions and responses. 
+The main page of the project initially displays a login form where a user can be selected. Once authenticated a dashboard page is shown which seperates questions into two categories — unanswered and answered. Unanswered questions can be viewed and answered. All answered questions can also be viewed and statistics relating to the answers are provided.
 
-## Available Scripts
+New questions can be added and answered and these will show up in the relevant category on the dashboard page. 
 
-In the project directory, you can run:
+A leaderboard page can also be viewed which displays users in order of who has asked/answered the most questions.  
 
-### `yarn start`
+Using Redux, React-Redux and Redux Thunk along with middleware users and questions are fetched, the logged in user is authenticated, new questions can be added and both user id's and question id's are exchanged and applied to question and user data. 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+React Router is used to create routes to specific URLs such as /leaderboard /add and to individual questions /question/:question_id. If a route does not exist a 404 page is displayed. 
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+The project is styled using [tailwindcss](https://tailwindcss.com/) and user avatars are sourced from [Pixabay](https://pixabay.com).
 
-### `yarn test`
+## Running the Project
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+To start the project use:
 
-### `yarn build`
+* `npm install` to install project dependencies
+* Then start the web server with `npm start`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Backend Data
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+This project utilises backend data provided by Udacity. [`_DATA.js`](src/utils/_DATA.js) contains methods which perform necessary operations on the provided data.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+There are two types of objects stored in the database:
 
-### `yarn eject`
+* Users
+* Questions
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Users
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Users include:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+| Attribute    | Type             | Description           |
+|-----------------|------------------|-------------------         |
+| id                 | String           | The user’s unique identifier |
+| name          | String           | The user’s first name  and last name     |
+| avatarURL  | String           | The path to the image file |
+| questions | Array | A list of ids of the polling questions this user created|
+| answers      | Object         |  The object's keys are the ids of each question this user answered. The value of each key is the answer the user selected. It can be either `'optionOne'` or `'optionTwo'` since each question has two options.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Questions
 
-## Learn More
+Questions include:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+| Attribute | Type | Description |
+|-----------------|------------------|-------------------|
+| id                  | String | The question’s unique identifier |
+| author        | String | The author’s unique identifier |
+| timestamp | String | The time when the question was created|
+| optionOne | Object | The first voting option|
+| optionTwo | Object | The second voting option|
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Voting Options
 
-### Code Splitting
+Voting options are attached to questions. They include:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+| Attribute | Type | Description |
+|-----------------|------------------|-------------------|
+| votes             | Array | A list that contains the id of each user who voted for that option|
+| text                | String | The text of the option |
 
-### Analyzing the Bundle Size
+Your code will talk to the database via 4 methods:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+* `_getUsers()`
+* `_getQuestions()`
+* `_saveQuestion(question)`
+* `_saveQuestionAnswer(object)`
 
-### Making a Progressive Web App
+1) `_getUsers()` Method
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+*Description*: Get all of the existing users from the database.  
+*Return Value*: Object where the key is the user’s id and the value is the user object.
 
-### Advanced Configuration
+2) `_getQuestions()` Method
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+*Description*: Get all of the existing questions from the database.  
+*Return Value*: Object where the key is the question’s id and the value is the question object.
 
-### Deployment
+3) `_saveQuestion(question)` Method
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+*Description*: Save the polling question in the database.  
+*Parameters*:  Object that includes the following properties: `author`, `optionOneText`, and `optionTwoText`. More details about these properties:
 
-### `yarn build` fails to minify
+| Attribute | Type | Description |
+|-----------------|------------------|-------------------|
+| author | String | The id of the user who posted the question|
+| optionOneText| String | The text of the first option |
+| optionTwoText | String | The text of the second option |
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+*Return Value*:  An object that has the following properties: `id`, `author`, `optionOne`, `optionTwo`, `timestamp`. More details about these properties:
+
+| Attribute | Type | Description |
+|-----------------|------------------|-------------------|
+| id | String | The id of the question that was posted|
+| author | String | The id of the user who posted the question|
+| optionOne | Object | The object has a text property and a votes property, which stores an array of the ids of the users who voted for that option|
+| optionTwo | Object | The object has a text property and a votes property, which stores an array of the ids of the users who voted for that option|
+|timestamp|String | The time when the question was created|
+
+4) `_saveQuestionAnswer(object)` Method
+
+*Description*: Save the answer to a particular polling question in the database.
+*Parameters*: Object that contains the following properties: `authedUser`, `qid`, and `answer`. More details about these properties:
+
+| Attribute | Type | Description |
+|-----------------|------------------|-------------------|
+| authedUser | String | The id of the user who answered the question|
+| qid | String | The id of the question that was answered|
+| answer | String | The option the user selected. The value should be either `"optionOne"` or `"optionTwo"`|
+
+
